@@ -30,9 +30,11 @@
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{graphicx}
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
 \usepackage{xpatch}
+\usepackage{float}
 
 \usepackage{xpatch}
 \makeatletter
@@ -52,7 +54,7 @@
 
 
 \author{%
-    Hengxu Wu-2024011308, Kairui Li-202401, Mo Shen-202401, Yangyi Xiong-2024011319\\
+    Hengxu Wu-2024011308, Kairui Li-2024011307, Mo Shen-2024011341, Yangyi Xiong-2024011319\\
   Tsinghua University\\
   Beijing, China \\
   \texttt{wuhx24@mails.tsinghua.edu.cn} \\
@@ -66,23 +68,63 @@
 
 
 \begin{abstract}
-    Our project 
+    Our project aims to build a real-time, multimodal VTuber system powered by a Large Language Model (LLM). It is designed to interact with users through natural conversation, generating context-aware and engaging responses to deliver an immersive experience in virtual environments.
 \end{abstract}
 
 
 \section{Introduction}
 %Deep learning classifiers have achieved great success in pattern recognition tasks in numerous fields \citet{LeCun2015}.
+Existing LLM-based vtuber system, like Open-LLM-VTuber, has made significant strides in creating interactive virtual avatars.
+However, these systems have also multiple drawbacks, such as lack of long-term memory and support for function calling and multi-agent collaboration.
+Our proposed system aims to address these limitations by integrating long-term memory capabilities, enabling function calling, and facilitating multi-agent collaboration.
+By enhancing these aspects, our vtuber system will provide a more immersive and dynamic user experience.
 
-Citations of inproceedings \cite{NIPS1994_24896ee4}.
+\section{Implementation Plan}
+We have divided our project into several key components, each focusing on a specific aspect of the vtuber system:
+the structure graph is shown in Figure \ref{fig:structure_graph}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{structure.png}
+    \caption{The structure graph of our proposed vtuber system.}
+    \label{fig:structure_graph}
+\end{figure}
+Based on the framework illustrated in the diagram, user inputs, including audio, text, and visual data are initially sent to the Frontend. The audio input is first processed by the Automatic Speech Recognition (ASR) module to convert it into text. Subsequently, both the transcribed text and the visual data are processed collectively by the Backend. At the core of the system, the Agent module takes these processed inputs and generates a structured response, which includes both action control commands and reply text.
+This response text is then parsed by the Backend to separate the action commands from the reply content. The reply text is forwarded to the Text-to-Speech (TTS) module to synthesize the corresponding audio response. Finally, the generated audio and the action control commands are transmitted to the Frontend and VTube Studio, respectively, where they are rendered as the final output presented to the user.
 
-Citations of book \cite{bower2012book}.
+\section{Paper Research}
 
-Citations of article \citep{Hasselmo5249}.
+Based on the structure above, we have searched for overview papers on each module to understand the current state of the art and identify suitable tools for implementation. Specifically, we focused on the areas of ASR\cite{sym11081018}, TTS\cite{tan2021surveyneuralspeechsynthesis} and long-term memory (LTM)\cite{maharana2024evaluatinglongtermconversationalmemory}\cite{wu2025humanmemoryaimemory} for the Agent module.
+
+\section{Time Schedule}
+We plan to complete the project within a span of 6 weeks, following the timeline below:
+\begin{itemize}
+    \item \textbf{Week 1-2:} Research and select appropriate LLMs and tools for integration. Set up the development environment and initial project structure.
+    \item \textbf{Week 3-4:} Implement the core functionalities, including long-term memory integration, function calling, and multi-agent collaboration.
+    \item \textbf{Week 5:} Test the system extensively, identify bugs, and optimize performance. Gather feedback from initial users.
+    \item \textbf{Week 6:} Finalize documentation, prepare a demonstration of the system, and submit the project for evaluation.
+\end{itemize}
+
+\section{Current Progress}
+Now we have integrated the Vtube Studio with our frontend, with correct
+voice and action control.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{preview.png}
+    \caption{The frontend interface of our vtuber system along with the vtuber avatar.}
+    \label{fig:frontend}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ciallo.jpg}
+    \caption{The vtuber avatar outputs in Vtube Studio.}
+    \label{fig:ciallo}
+\end{figure}
+
 
 
 \bibliographystyle{Ref}  %plainnat,abbrvnat,unsrtnat
 \small
-
+\bibliography{ref}
 
 
 \end{document}
